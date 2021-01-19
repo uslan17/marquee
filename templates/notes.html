@@ -1,0 +1,194 @@
+{% extends "layout.html" %}
+{% block title %}My Notes{% endblock %}
+
+{% block profile %}
+
+{% endblock %}
+
+{% block content %}
+    <h1 class="title">My Notes</h1>
+
+    <form action="#" method="post" enctype="multipart/form-data">
+      {{ form.csrf_token }}
+      <div class="box" style="margin-bottom: 20px;">
+        <article class="media">
+          <div class="media-content">
+            <div class="content">
+              <div class="control">
+                {{ form.title(style="width: 50%; margin-bottom:10px;", class="input is-rounded", required=true, autofocus=true, autocomplete="off",
+                  placeholder="Your Note Title") }}
+              </div>
+              {% for error in form.title.errors %}
+                <p class="help has-background-warning">
+                    {{ error }}
+                </p>
+              {% endfor %}
+      
+              <div class="control">
+                {{ form.content(class="input", required=true, autofocus=true, autocomplete="off",
+                  placeholder="Tell us ..") }}
+              </div>
+              {% for error in form.content.errors %}
+                <p class="help has-background-warning">
+                    {{ error }}
+                </p>
+              {% endfor %}
+              <br>
+              <div class="level">
+                <div class="level-left">
+                  <div class="field">
+                    <div class="file is-info has-name">
+                      <label class="file-label">
+                        <div class="control">
+                          {{ form.photo(class="file-input", required=false) }}
+                          <span class="file-cta">
+                            <span class="file-icon">
+                              <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                              Choose Photo..
+                            </span>
+                          </span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="control">
+                  <div class="select">
+                    {{ form.category(class="select", required=true)}}
+                    {% for error in form.category.errors %}
+                      <p class="help has-background-warning">
+                          {{ error }}
+                      </p>
+                    {% endfor %}
+                  </div>
+                </div>
+      
+      
+                <div class="level-right">
+                  
+                  <div class="control has-icons-left has-icons-right">
+                    {{ form.url(class="input", required=false, placeholder='Video Url', autocomplete="off")}}
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-link"></i>
+                    </span>
+                  </div>
+      
+                  <button class="button" type="submit">Add Note</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+      </form>
+
+      {% if notes %}
+        {% for note in notes %}
+        <div class="box">
+        <article class="media">
+
+          {% if note["photo"] != None %}
+            <figure class="media-left">
+              <p class="image is-128x128" style="object-fit: scale-down;">
+                <a href="./static/images/uploads/{{ note['photo'] }}"><img  class="is-square" width="480" height="270" src="./static/images/uploads/{{ note['photo'] }}"></a>
+              </p>
+            </figure>
+          {% endif %}
+
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>{{ note['title'] }}  @{{ session["username"] }}</strong>
+                <br>
+                {{ note['text_field'] }}
+                <br>
+                <small><a>Like</a> · <a class="reply-link" data-reply="{{note['post_id']}}">Reply</a> · {{ note["category_title"] }}</small>
+              </p>
+            </div>
+            {% if note["video"] %} 
+            <iframe width="480" height="270" src="{{ note['video'] }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            {% endif %}
+          
+            <form action="" class="post-reply-form" data-form= "{{note['post_id']}}" method="post">
+              <div class="reply-form">
+                <article class="media">
+                  <div class="media-content">
+                    <div class="field">
+                      <p class="control">
+                        <input name="reply" class="textarea" autocomplete="off" placeholder="What is your comment ?" rows="1"></input>
+                      </p>
+                    </div>
+                    <input type="hidden" name="post_id" value="{{note['post_id']}}">
+                    <div class="field">
+                      <p class="control">
+                        <button type="submit" class="button">Write comment..</button>
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </form>
+            
+          {% if note["comments"] %}  
+            {% for comment in note["comments"] %}
+              <article class="media">
+                <div class="media-content">
+                  <div class="content">
+                    <p>
+                      <strong>@{{ comment["username"] }}</strong>
+                      <br>
+                      {{ comment["comment_text"] }}
+                      <br>
+                      <small>
+                        {% if session["is_admin"] %}
+                        <a href=" {{ url_for('delete_comment_page', comment_id=comment['comment_id']) }}" name="delete_comment">Inapropriate Comment</a>
+                        {% endif %}
+                      </small>
+                    </p>
+                  </div>
+                </div>
+              </article>
+            {% endfor %}
+          {% endif %}  
+          </div>
+
+
+            <div class="media-right">
+              <div class="user-interaction">
+                <div class="dots">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="user-interaction-menu">
+                <a href=" {{ url_for('post_edit_page', post_id=note['post_id']) }}" name="edit">Edit</a>
+                <a href=" {{ url_for('post_delete_page', post_id=note['post_id'], filename=note['photo'] ) }}" name="delete">Delete</a>
+              </div>
+              </div>
+            </div>
+
+        </article>
+      </div>
+    {% endfor %}
+    {% endif %}
+
+    <script>
+      $('.user-interaction').click(function(e){
+        e.stopPropagation();
+        $(this).find('.user-interaction-menu').slideToggle();
+      })
+    
+      $(document).click(function(){
+        $('.user-interaction-menu').slideUp();
+      })
+  
+      $('.reply-link').click(function(e){
+        e.preventDefault();
+        var id = $(this).data('reply');
+        $(`.post-reply-form[data-form=${id}]`).slideToggle();
+      })
+    </script>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block title %}Flow{% endblock %}
+
+{% block content %}
+<h1 class="title">SETTINGS</h1>
+    <div class="box">
+        <form action='' method="post">
+            {{ add_form.csrf_token }}
+            <div class="field">
+                <label class="label">Add Category</label>
+                <div class="control">
+                {{ add_form.add_category(placeholder= "Add a category", autofocus=true, autocomplete="off", class="input is-info", 
+                    style="width: 30%;")}}
+                </div>
+                <button name="add" class="button is-dark">Add</button>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="box ">
+        <form action='' method="post">
+            {{ delete_form.csrf_token }}
+            <div class="field">
+                <label class="label">Delete Category</label>
+                  <div class="select">
+                    {{ delete_form.delete_category(class="select")}}
+                  </div>
+                <button name="delete" class="button is-dark">Delete</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="box ">
+        <form action="" method="post">
+            <div class="field">
+                <label class="label">Give Admin Role to @username</label>
+                  <div class="select">
+                    <select name="user">
+                        <option value=0>Select A User</option>
+                    {% for user in users %}
+                        <option value= {{user["user_id"]}}>{{ user['username'] }}</option>
+                    {% endfor %}
+                    </select>
+                  </div>
+                <button name="user" class="button is-dark">Give Admin Role</button>
+            </div>
+        </form>
+    </div>
+
+    <h3 class="title"> CONTACTS </h3>
+    <div class="box ">
+        {% for contact in contacts %}
+            <div class="box">
+                From {{ contact['name'] }} <br>
+                Subject: {{ contact['subject'] }} <br>
+                Message: {{ contact['contact_content'] }} <br>
+                Sent 
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

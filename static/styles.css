@@ -1,0 +1,131 @@
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+}
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    /* background-image: url(/static/images/marquee.png);
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%; 
+    background-repeat: no-repeat;
+    overflow-x: none; */
+    margin-left: 10px;
+    
+
+    /* center contents */
+    text-align: center;
+}
+
+.back {
+    opacity: 0.2;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+h1.title {
+    color: rgb(53, 53, 53);
+    margin-right: 3px;
+}
+
+.logback {
+    background-image: url(/static/images/back.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%; 
+    background-repeat: no-repeat;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+    font-family:"Overlock", sans-serif !important; 
+}
+
+.mes {
+    margin-left: 200px;
+}
+
+footer {
+    margin-top: 350px;
+}
+
+.center {
+    margin-top: 100px;
+}
+
+
+#marquee {
+    font-family:'Papyrus'; 
+    color:darkred; 
+    font-weight: bold;
+    font-size: 25px; 
+}
+
+.columns {
+    column-gap: 2rem;
+}
+
+.user-interaction{
+    position:relative;
+}
+
+.user-interaction .dots{
+    display:flex;
+    width:30px;
+    height:10px;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+
+    
+  }
+  .user-interaction span{
+    display:block;
+    width:3px;
+    height:3px;
+    background:#333;
+    border-radius:50%;
+    margin:0 2px;
+
+    
+  }
+  
+  .user-interaction-menu{
+      background:#fff;
+    border:1px solid #ddd;
+    width:100px;
+    padding:10px;
+    margin-top:-1px;
+    display:none;
+    position: absolute;
+    right: 0;
+    
+    
+  }
+  .user-interaction-menu a{
+    display:block;
+    text-decoration:none;
+    color:#000;
+    margin-top:5px;
+
+  }
+
+  .post-reply-form{
+      display:none;
+  }

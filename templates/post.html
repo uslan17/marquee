@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}Post{% endblock %}
+
+
+{% block content %}
+    <h1 class="title">Post</h1>
+
+    <table class="table">
+      <tr>
+        <th>Category:</th>
+        <td>{{ post.category }}</td>
+      </tr>
+      <tr>
+        <th>Content:</th>
+        <td>{{ post.content }}</td>
+      </tr>
+    </table>
+
+    {% if true %}
+    <div class="field is-grouped">
+        <div class="control">
+          <a class="button is-primary is-outlined is-small"
+             href="{{ request.path }}/edit">Edit</a>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

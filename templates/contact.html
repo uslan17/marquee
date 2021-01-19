@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+    <h1 class="title">Contact Information</h1>
+
+    <form action="" method="post" name="contact">
+      {{ form.csrf_token }}
+      <div class="field">
+          <label class="label">Name-Surname</label>
+          <div class="control">
+              {{ form.name(autofocus=True,
+                  class='input is-medium',
+                  placeholder="Who are you?") }}
+          </div><br>
+          <label class="label">Subject</label>
+          <div class="control">
+              {{ form.subject(class='input is-medium',
+                  placeholder="What is it about?") }}
+          </div><br>
+  
+          <label class="label">Your Message</label>
+          <div class="control has-icons-left has-icons-right">
+              {{ form.message(class='textarea is-medium',
+                  placeholder="What is your honorable thoughts, what do you want to tell us ?") }}
+          </div><br>
+  
+          <label class="label">Email</label>
+          <div class="control has-icons-left has-icons-right">
+              {{ form.email(class='input is-medium',
+                  placeholder="someone@email.com") }}
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </div><br>
+          <div class="field is-grouped">
+              <div class="control">
+                <button class="button is-link" name="submit">Submit</button>
+              </div>
+          </div>
+        </div>
+      </form>
+
+
+{% endblock %}

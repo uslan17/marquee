@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="../static/signboard.svg">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"/>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='styles.css') }}"/>
+    <title>MARQUEE - Register</title>
+  </head>
+  <body class="logback">
+    <section class="hero">
+      <div class="hero-body center">
+        <div class="container has-text-centered">
+          <div class="column is-4 is-offset-4">
+            <h3 class="title is-2 has-text-white">Register</h3>
+            <div class="box">
+              <form action="/register" method="post" name="register">
+                {{ form.csrf_token }}
+
+                <div class="field">
+                    <div class="control">
+                      {{ form.first_name(required=false, autofocus=True, autocomplete="off",
+                                       class='input is-large',
+                                       placeholder='First Name') }}
+                    </div>
+                    {% for error in form.first_name.errors %}
+                      <p class="help has-background-warning">
+                          {{ error }}
+                      </p>
+                    {% endfor %}
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                      {{ form.last_name(required=false, autofocus=True,
+                                       class='input is-large',
+                                       placeholder='Last Name') }}
+                    </div>
+                    {% for error in form.last_name.errors %}
+                      <p class="help has-background-warning">
+                          {{ error }}
+                      </p>
+                    {% endfor %}
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                      {{ form.email(required=false, autofocus=True,
+                                       class='input is-large',
+                                       placeholder='Email') }}
+                    </div>
+                    {% for error in form.email.errors %}
+                      <p class="help has-background-warning">
+                          {{ error }}
+                      </p>
+                    {% endfor %}
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                      {{ form.phone_num(required=false, autofocus=True,
+                                       class='input is-large',
+                                       placeholder='Phone Number') }}
+                    </div>
+                    {% for error in form.phone_num.errors %}
+                      <p class="help has-background-warning">
+                          {{ error }}
+                      </p>
+                    {% endfor %}
+                </div>
+
+                <div class="field">
+                  <div class="control">
+                    {{ form.username(required=True, autofocus=false,
+                                     class='input is-large',
+                                     placeholder='your username') }}
+                  </div>
+                  {% for error in form.username.errors %}
+                    <p class="help has-background-warning">
+                        {{ error }}
+                    </p>
+                  {% endfor %}
+                </div>
+
+                <div class="field">
+                  <div class="control">
+                    {{ form.password(required=True, class='input is-large',
+                                     placeholder='your password') }}
+                  </div>
+                  {% for error in form.password.errors %}
+                    <p class="help has-background-warning">
+                        {{ error }}
+                    </p>
+                  {% endfor %}
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                      {{ form.confirm_password(required=True, class='input is-large',
+                                       placeholder='Confirm password') }}
+                    </div>
+                    {% for error in form.confirm_password.errors %}
+                      <p class="help has-background-warning">
+                          {{ error }}
+                      </p>
+                    {% endfor %}
+                  </div>
+
+                <button class="button is-block is-info is-large is-fullwidth">
+                  Register
+                </button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <small>&copy; 2020, ufellecan</small>
+        </div>
+    </footer>
+  </body>
+</html>

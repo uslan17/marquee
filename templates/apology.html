@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="../static/signboard.svg">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"/>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='styles.css') }}"/>
+    <title>MARQUEE - ERROR</title>
+  </head>
+  <body class="logback">
+    <section class="hero">
+      <div class="hero-body center">
+        <div class="container has-text-centered">
+          <div class="column is-4 is-offset-4">
+            <h3 class="title is-2 has-text-white">ERROR</h3>
+            <div class="box">
+                {{ top }}
+            </div>
+            <div class="box">
+                {{ bottom }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <small>&copy; 2020, ufellecan</small>
+        </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+    <h1 class="title">Profile</h1>
+    
+    <form action="" method="post" name="profile">
+    {{ form.csrf_token }}
+    <div class="field">
+        <label class="label">First Name</label>
+        <div class="control">
+            {{ form.first_name(autofocus=True,
+                class='input is-medium',
+                placeholder=user.first_name,
+                value=user.first_name) }}
+        </div><br>
+        <label class="label">Last Name</label>
+        <div class="control">
+            {{ form.last_name(class='input is-medium',
+                placeholder=user.last_name,
+                value=user.last_name) }}
+        </div><br>
+
+        <label class="label">Username</label>
+        <div class="control has-icons-left has-icons-right">
+            {{ form.username(class='input is-medium',
+                placeholder=user.username,
+                value=user.username) }}
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </div><br>
+
+        <label class="label">Email</label>
+        <div class="control has-icons-left has-icons-right">
+            {{ form.email(class='input is-medium',
+                placeholder=user.email,
+                value=user.email) }}
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </div><br>
+        <div class="control"></div>
+        <label class="label">Phone Number</label>
+        {{ form.phone_num(class='input is-medium',
+            placeholder=user.phone_num,
+            value=user.phone_num) }}
+        </div><br>
+        <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-link" name="submit">Submit</button>
+            </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="field">
+      <div class='box'>
+        <div class="control">
+          <a href="{{ url_for('delete_account_page') }}"><button class="button is-danger" name="delete_account">Delete Account</button></a>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}
